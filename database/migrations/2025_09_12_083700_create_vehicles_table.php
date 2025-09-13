@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('vehicles', function (Blueprint $table) {
-            $table->increments('id_vehiculo');
-            $table->foreignId('id_domiciliario')->constrained('delivery_people', 'id_domiciliario')->onDelete('cascade');
+            $table->id('id_vehiculo');
+            $table->foreignId('id_domiciliario')
+                    ->constrained('delivery_people', 'id_domiciliario')
+                    ->onDelete('cascade');
             $table->string('placa', 10)->unique();
             $table->string('tipo_vehiculo');
             $table->date('run_vigente');

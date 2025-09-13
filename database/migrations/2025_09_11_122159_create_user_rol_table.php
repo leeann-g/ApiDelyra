@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_rol', function (Blueprint $table) {
             $table->foreignId('id_usuario')
-                    ->constrained('users', 'id_usuario')
+                    ->constrained('users','id_usuario')
                     ->onDelete('cascade');
             $table->unsignedTinyInteger('id_rol');
             $table->foreign('id_rol')

@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('delivery_people', function (Blueprint $table) {
-            $table->increments('id_domiciliario');
-            $table->foreignId('id_usuario')->constrained('users','id_usuario')->onDelete('cascade');
+            $table->id('id_domiciliario');
+            $table->foreignId('id_usuario')
+                    ->constrained('users','id_usuario')
+                    ->onDelete('cascade');
             $table->boolean('estado_dis')->default(false);
             $table->timestamps();
         });

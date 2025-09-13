@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->increments('id_pedido');
-            $table->foreignId('id_cliente')->constrained('customers', 'id_cliente')->onDelete('cascade');
-            $table->date('fecha_pedido');
-            $table->string('estado');
-            $table->decimal('total', 10,2);
-            $table->timestamps();
-        });
+            Schema::create('orders', function (Blueprint $table) {
+                $table->id('id_pedido');
+                $table->foreignId('id_cliente')->constrained('customers', 'id_cliente')->onDelete('cascade');
+                $table->date('fecha_pedido');
+                $table->string('estado');
+                $table->decimal('total', 10,2);
+                $table->timestamps();
+            });
     }
 
     /**
