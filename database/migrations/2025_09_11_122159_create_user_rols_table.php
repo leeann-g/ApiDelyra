@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
-            $table->id('id_cliente');
-            $table->foreignId('id_usuario');
-            $table->unsignedTinyInteger('id_rol');
-            $table->foreign(['id_usuario','id_rol'])
-                    ->references(['id_usuario','id_rol'])
-                    ->on('user_rols')
+        Schema::create('user_rols', function (Blueprint $table) {
+            $table->foreignId('id_usuario')
+                    ->constrained('users','id_usuario')
                     ->onDelete('cascade');
-            $table->string('direccion_envio',255);
+            $table->unsignedTinyInteger('id_rol');
+            $table->foreign('id_rol')
+                    ->references('id_rol')
+                    ->on('rols')
+                    ->onDelete('cascade');
+            $table->primary(['id_usuario', 'id_rol']);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('user_rol');
     }
 };

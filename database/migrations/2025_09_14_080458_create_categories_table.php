@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('delivery_people', function (Blueprint $table) {
-            $table->id('id_domiciliario');
-            $table->foreignId('id_usuario')
-                    ->constrained('users','id_usuario')
-                    ->onDelete('cascade');
-            $table->boolean('estado_dis')->default(false);
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id('id_categoria');
+            $table->string('nombre_categoria');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('delivery_people');
+        Schema::dropIfExists('categories');
     }
 };

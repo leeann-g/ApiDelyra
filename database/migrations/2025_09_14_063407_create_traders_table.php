@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
-            $table->id('id_cliente');
+        Schema::create('traders', function (Blueprint $table) {
+            $table->id('id_comerciante');
             $table->foreignId('id_usuario');
             $table->unsignedTinyInteger('id_rol');
             $table->foreign(['id_usuario','id_rol'])
                     ->references(['id_usuario','id_rol'])
                     ->on('user_rols')
                     ->onDelete('cascade');
-            $table->string('direccion_envio',255);
+            $table->string('nombre_local');
+            $table->string('cuenta_bancaria',30);
+            $table->string('nit',30);
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('traders');
     }
 };

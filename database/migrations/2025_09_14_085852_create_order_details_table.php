@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_rol', function (Blueprint $table) {
-            $table->foreignId('id_usuario')
-                    ->constrained('users','id_usuario')
+        Schema::create('order_details', function (Blueprint $table) {
+            $table->foreignId('id_pedido')
+                    ->constrained('orders', 'id_pedido')
                     ->onDelete('cascade');
-            $table->unsignedTinyInteger('id_rol');
-            $table->foreign('id_rol')
-                    ->references('id_rol')
-                    ->on('rols')
+            $table->foreignId('id_producto')
+                    ->constrained('products', 'id_producto')
                     ->onDelete('cascade');
-            $table->primary(['id_usuario', 'id_rol']);
+            $table->string('cantidad_productos');
+            $table->decimal('precio_unitario');
+            $table->decimal('total',10,2);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_rol');
+        Schema::dropIfExists('order_details');
     }
 };

@@ -17,7 +17,7 @@ return new class extends Migration
                     ->constrained('delivery_people', 'id_domiciliario')
                     ->onDelete('cascade');
             $table->string('placa', 10)->unique();
-            $table->string('tipo_vehiculo');
+            $table->string('tipo_vehiculo',255);
             $table->date('run_vigente');
             $table->date('seguro_vigente');
             $table->timestamps();
