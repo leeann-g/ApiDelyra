@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
-            $table->id('id_cliente');
+        Schema::create('delivery_people', function (Blueprint $table) {
+            $table->id('id_domiciliario');
             $table->foreignId('id_usuario');
             $table->unsignedTinyInteger('id_rol');
             $table->foreign(['id_usuario','id_rol'])
                     ->references(['id_usuario','id_rol'])
                     ->on('user_rols')
                     ->onDelete('cascade');
-            $table->string('direccion_envio',255);
+            $table->boolean('estado_dis')->default(false);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('delivery_people');
     }
 };
