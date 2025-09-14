@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Delivery;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class DeliveryController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,8 +34,7 @@ class DeliveryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Delivery $delivery)
-
+    public function show(Product $product)
     {
         //
     }
@@ -43,7 +42,7 @@ class DeliveryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Delivery $delivery)
+    public function edit(Product $product)
     {
         //
     }
@@ -51,7 +50,7 @@ class DeliveryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Delivery $delivery)
+    public function update(Request $request, Product $product)
     {
         //
     }
@@ -59,8 +58,7 @@ class DeliveryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Delivery $delivery)
-
+    public function destroy(Product $product)
     {
         //
     }
