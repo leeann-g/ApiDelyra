@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Delivery;
-use App\Models\Order;
-use App\Models\DeliveryPerson;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Validator;
 
 class DeliveryController extends Controller
 {
@@ -16,23 +13,15 @@ class DeliveryController extends Controller
      */
     public function index(): JsonResponse
     {
-        try {
-            // Obtener todas las entregas con sus relaciones (pedido, cliente, usuario, domiciliario)
-            $deliveries = Delivery::with(['order.customer.user', 'deliveryPerson.user'])->get();
+        // Obtener todas las entregas con relaciones básicas
+        $deliveries = Delivery::with(['order.customer.user', 'deliveryPerson.user'])->get();
 
-            // Devolver respuesta exitosa con los datos
-            return response()->json([
-                'success' => true,
-                'data' => $deliveries,
-                'message' => 'Deliveries retrieved successfully'
-            ], 200);
-        } catch (\Exception $e) {
-            // Si hay error, devolver mensaje de error
-            return response()->json([
-                'success' => false,
-                'message' => 'Error retrieving deliveries: ' . $e->getMessage()
-            ], 500);
-        }
+        // Devolver respuesta en JSON
+        return response()->json([
+            'success' => true,
+            'data' => $deliveries,
+            'message' => 'Entregas obtenidas correctamente'
+        ], 200);
     }
 
     /**
@@ -48,11 +37,11 @@ class DeliveryController extends Controller
             'estado' => $request->status ?? false
         ]);
 
-        // Devolver respuesta exitosa
+        // Devolver respuesta en JSON
         return response()->json([
             'success' => true,
             'data' => $delivery,
-            'message' => 'Delivery created successfully'
+            'message' => 'Entrega creada correctamente'
         ], 201);
     }
 
@@ -61,20 +50,15 @@ class DeliveryController extends Controller
      */
     public function show(Delivery $delivery): JsonResponse
     {
-        try {
-            $delivery->load(['order.customer.user', 'deliveryPerson.user']);
+        // Cargar relaciones básicas
+        $delivery->load(['order.customer.user', 'deliveryPerson.user']);
 
-            return response()->json([
-                'success' => true,
-                'data' => $delivery,
-                'message' => 'Delivery retrieved successfully'
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Error retrieving delivery: ' . $e->getMessage()
-            ], 500);
-        }
+        // Devolver respuesta en JSON
+        return response()->json([
+            'success' => true,
+            'data' => $delivery,
+            'message' => 'Entrega obtenida correctamente'
+        ], 200);
     }
 
     /**
@@ -89,11 +73,11 @@ class DeliveryController extends Controller
             'estado' => $request->status
         ]);
 
-        // Devolver respuesta exitosa
+        // Devolver respuesta en JSON
         return response()->json([
             'success' => true,
             'data' => $delivery,
-            'message' => 'Delivery updated successfully'
+            'message' => 'Entrega actualizada correctamente'
         ], 200);
     }
 
@@ -105,10 +89,10 @@ class DeliveryController extends Controller
         // Eliminar la entrega
         $delivery->delete();
 
-        // Devolver respuesta exitosa
+        // Devolver respuesta en JSON
         return response()->json([
             'success' => true,
-            'message' => 'Delivery deleted successfully'
+            'message' => 'Entrega eliminada correctamente'
         ], 200);
     }
 

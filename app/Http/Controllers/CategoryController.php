@@ -12,7 +12,15 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        // Obtener todas las categorías
+        $categories = Category::all();
+
+        // Devolver respuesta en JSON
+        return response()->json([
+            'success' => true,
+            'data' => $categories,
+            'message' => 'Categorías obtenidas correctamente'
+        ], 200);
     }
 
     /**
@@ -28,7 +36,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Crear una nueva categoría
+        $category = Category::create([
+            'nombre_categoria' => $request->nombre_categoria,
+        ]);
+
+        // Respuesta al crear
+        return response()->json([
+            'success' => true,
+            'data' => $category,
+            'message' => 'Categoría creada correctamente'
+        ], 201);
     }
 
     /**
@@ -36,7 +54,12 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        // Devolver una categoría específica
+        return response()->json([
+            'success' => true,
+            'data' => $category,
+            'message' => 'Categoría obtenida correctamente'
+        ], 200);
     }
 
     /**
@@ -52,7 +75,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        // Actualizar la categoría
+        $category->update([
+            'nombre_categoria' => $request->nombre_categoria,
+        ]);
+
+        // Respuesta al actualizar
+        return response()->json([
+            'success' => true,
+            'data' => $category,
+            'message' => 'Categoría actualizada correctamente'
+        ], 200);
     }
 
     /**
@@ -60,6 +93,13 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        // Eliminar la categoría
+        $category->delete();
+
+        // Respuesta al eliminar
+        return response()->json([
+            'success' => true,
+            'message' => 'Categoría eliminada correctamente'
+        ], 200);
     }
 }

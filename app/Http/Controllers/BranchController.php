@@ -12,7 +12,15 @@ class BranchController extends Controller
      */
     public function index()
     {
-        //
+        // Obtener todas las sucursales
+        $branches = Branch::all();
+
+        // Devolver respuesta en JSON
+        return response()->json([
+            'success' => true,
+            'data' => $branches,
+            'message' => 'Sucursales obtenidas correctamente'
+        ], 200);
     }
 
     /**
@@ -28,7 +36,21 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Crear una nueva sucursal
+        $branch = Branch::create([
+            'id_comerciante' => $request->id_comerciante,
+            'nombre_sucursal' => $request->nombre_sucursal,
+            'direccion' => $request->direccion,
+            'latitud' => $request->latitud,
+            'longitud' => $request->longitud,
+        ]);
+
+        // Respuesta al crear
+        return response()->json([
+            'success' => true,
+            'data' => $branch,
+            'message' => 'Sucursal creada correctamente'
+        ], 201);
     }
 
     /**
@@ -36,7 +58,12 @@ class BranchController extends Controller
      */
     public function show(Branch $branch)
     {
-        //
+        // Devolver una sucursal específica
+        return response()->json([
+            'success' => true,
+            'data' => $branch,
+            'message' => 'Sucursal obtenida correctamente'
+        ], 200);
     }
 
     /**
@@ -52,7 +79,21 @@ class BranchController extends Controller
      */
     public function update(Request $request, Branch $branch)
     {
-        //
+        // Actualizar la sucursal
+        $branch->update([
+            'id_comerciante' => $request->id_comerciante,
+            'nombre_sucursal' => $request->nombre_sucursal,
+            'direccion' => $request->direccion,
+            'latitud' => $request->latitud,
+            'longitud' => $request->longitud,
+        ]);
+
+        // Respuesta al actualizar
+        return response()->json([
+            'success' => true,
+            'data' => $branch,
+            'message' => 'Sucursal actualizada correctamente'
+        ], 200);
     }
 
     /**
@@ -60,6 +101,13 @@ class BranchController extends Controller
      */
     public function destroy(Branch $branch)
     {
-        //
+        // Eliminar la sucursal
+        $branch->delete();
+
+        // Respuesta al eliminar
+        return response()->json([
+            'success' => true,
+            'message' => 'Sucursal eliminada correctamente'
+        ], 200);
     }
 }

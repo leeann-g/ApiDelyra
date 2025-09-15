@@ -12,7 +12,15 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        // Obtener todos los carritos
+        $carts = Cart::all();
+
+        // Devolver respuesta en JSON
+        return response()->json([
+            'success' => true,
+            'data' => $carts,
+            'message' => 'Carritos obtenidos correctamente'
+        ], 200);
     }
 
     /**
@@ -28,7 +36,21 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Crear nuevo carrito
+        $cart = Cart::create([
+            'id_cliente' => $request->id_cliente,
+            'direccion_envio' => $request->direccion_envio,
+            'cantidad_items' => $request->cantidad_items,
+            'envio_estimado' => $request->envio_estimado,
+            'total' => $request->total,
+        ]);
+
+        // Devolver respuesta en JSON
+        return response()->json([
+            'success' => true,
+            'data' => $cart,
+            'message' => 'Carrito creado correctamente'
+        ], 201);
     }
 
     /**
@@ -36,7 +58,12 @@ class CartController extends Controller
      */
     public function show(Cart $cart)
     {
-        //
+        // Devolver el carrito específico
+        return response()->json([
+            'success' => true,
+            'data' => $cart,
+            'message' => 'Carrito obtenido correctamente'
+        ], 200);
     }
 
     /**
@@ -52,7 +79,21 @@ class CartController extends Controller
      */
     public function update(Request $request, Cart $cart)
     {
-        //
+        // Actualizar el carrito
+        $cart->update([
+            'id_cliente' => $request->id_cliente,
+            'direccion_envio' => $request->direccion_envio,
+            'cantidad_items' => $request->cantidad_items,
+            'envio_estimado' => $request->envio_estimado,
+            'total' => $request->total,
+        ]);
+
+        // Devolver respuesta en JSON
+        return response()->json([
+            'success' => true,
+            'data' => $cart,
+            'message' => 'Carrito actualizado correctamente'
+        ], 200);
     }
 
     /**
@@ -60,6 +101,13 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //
+        // Eliminar el carrito
+        $cart->delete();
+
+        // Devolver respuesta en JSON
+        return response()->json([
+            'success' => true,
+            'message' => 'Carrito eliminado correctamente'
+        ], 200);
     }
 }
